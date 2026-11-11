@@ -89,9 +89,12 @@ main.map-view>header,main.map-view>footer{display:none}main.map-view{padding:6px
 .map-workspace{flex:1;min-height:0;position:relative;display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:7px}.map-canvas{min-width:0;min-height:0;display:flex}#province-tiles{flex:1;min-width:0;min-height:0;overflow:hidden;touch-action:none}#province-tiles svg{width:100%;height:100%;max-height:none;touch-action:none}#province-tiles svg *{touch-action:none}
 #province-scores{max-height:none;min-height:0;font-size:12px}.province-shape.is-chosen{filter:brightness(1.2)}
 @media(pointer:coarse),(max-width:700px){.map-workspace{display:block}.map-canvas{width:100%;height:100%}#province-scores{display:none;position:absolute;right:0;top:0;bottom:0;width:160px;max-height:none;box-sizing:border-box;z-index:4;box-shadow:-4px 0 18px #0007}#region-map.scores-open #province-scores{display:block}#region-map .map-title strong{font-size:17px}.map-controls button{min-height:32px;padding:4px 8px}#province-tiles svg{max-height:none}}
-</style></head><body><div id="loading-game" role="status"><div><span id="loading-message">正在加载《大王别回头》…</span><button id="retry-load" hidden type="button">重新加载</button></div></div><noscript><style>#loading-game{display:none}</style><p style="padding:20px">请在手机浏览器中打开此游戏。文件预览如果禁用了脚本，按钮不会响应。</p></noscript><main><header><div><div class="game-title"><h1>大王别回头</h1><span id="level-badge">第 1 关</span></div></div><div id="state">献图之名，赴一场冒险</div><div class="top-actions"><button id="sound" type="button" aria-pressed="true">音效：开</button><button id="restart">重新开始</button><button id="leave" type="button">退出本局</button></div></header><div id="stage"><canvas id="c" width="1200" height="620"></canvas>
+</style><style>
+#artwork-status{display:grid;gap:7px;margin:10px auto;max-width:310px;color:#f2d3a1;font-size:12px}#artwork-status[hidden]{display:none}#artwork-progress{width:100%;height:7px;accent-color:#e9b963}#artwork-retry[hidden]{display:none}
+#level-card .menu-buttons button.preparing:disabled{background:linear-gradient(#806039,#624728);color:#ffe8bb;border:1px solid #bc9155;opacity:1;cursor:progress;box-shadow:inset 0 1px #eac38940}
+</style></head><body><div id="loading-game" role="status"><div><span id="loading-message">正在加载《大王别回头》…</span><button id="retry-load" hidden type="button">重新加载</button></div></div><noscript><style>#loading-game{display:none}</style><p style="padding:20px">请在手机浏览器中打开此游戏。文件预览如果禁用了脚本，按钮不会响应。</p></noscript><main class="map-view"><header><div><div class="game-title"><h1>大王别回头</h1><span id="level-badge">第 1 关</span></div></div><div id="state">献图之名，赴一场冒险</div><div class="top-actions"><button id="sound" type="button" aria-pressed="true">音效：开</button><button id="restart">重新开始</button><button id="leave" type="button">退出本局</button></div></header><div id="stage"><canvas id="c" width="1200" height="620"></canvas>
 <section id="level-menu" aria-label="选择关卡">
- <div id="region-map" aria-label="省级地区选择与战绩"><div class="map-title"><strong>九州战绩</strong><div class="map-controls"><button type="button" id="zoom-in" aria-label="放大地图">＋</button><button type="button" id="zoom-out" aria-label="缩小地图">−</button><button type="button" id="zoom-reset">全图</button><button type="button" id="toggle-scores" aria-expanded="false">各省极速</button></div></div><div class="map-workspace"><div class="map-canvas"><div id="province-tiles"></div></div><aside id="province-scores" aria-label="各省第二关最快用时"></aside></div></div><div class="menu-card" id="level-card"><p>咸阳宫 · 献图密令</p><h2>大王别回头</h2><div class="menu-buttons"><button id="play-one" type="button">开始第一关</button><button id="play-two" type="button" disabled>第二关 · 未解锁</button></div><select id="province" hidden aria-label="选择省级地区"></select><button type="button" id="change-region">返回地区地图</button><p id="region-record"></p><p id="menu-hint">通过第一关，解锁秦王的高强度警戒。</p></div>
+ <div id="region-map" aria-label="省级地区选择与战绩"><div class="map-title"><strong>九州战绩</strong><div class="map-controls"><button type="button" id="zoom-in" aria-label="放大地图">＋</button><button type="button" id="zoom-out" aria-label="缩小地图">−</button><button type="button" id="zoom-reset">全图</button><button type="button" id="toggle-scores" aria-expanded="false">各省极速</button></div></div><div class="map-workspace"><div class="map-canvas"><div id="province-tiles"></div></div><aside id="province-scores" aria-label="各省第二关最快用时"></aside></div></div><div class="menu-card" id="level-card" hidden><p>咸阳宫 · 献图密令</p><h2>大王别回头</h2><div class="menu-buttons"><button id="play-one" type="button">开始第一关</button><button id="play-two" type="button" disabled>第二关 · 未解锁</button></div><select id="province" hidden aria-label="选择省级地区"></select><button type="button" id="change-region">返回地区地图</button><p id="region-record"></p><div id="artwork-status" role="status" aria-live="polite"><span id="artwork-message">首次打开正在准备画面，请稍候…</span><progress id="artwork-progress" max="5" aria-label="游戏画面加载进度"></progress><button id="artwork-retry" type="button" hidden>重新加载</button></div><p id="menu-hint">通过第一关，解锁秦王的高强度警戒。</p></div>
 </section></div><footer><span>按住空格 / → 或右侧按钮前进<br>松开立即收刀献图 · 回头时千万别动</span><span id="meter">距秦王 100%</span><button id="go">按住 · 悄悄前进</button></footer></main><script>
 const c=document.querySelector('canvas'),g=c.getContext('2d'),statusEl=document.querySelector('#state'),meter=document.querySelector('#meter');let x,phase,timer,held=false,last=0,elapsed=0,endTime=0,guards=0;
 let level=1;
@@ -389,31 +392,44 @@ function waitForImage(image) {
   });
 }
 
-let artworkReady = false;
+let artworkReady = false, artworkLoaded = 0, artworkFailed = false;
+const artworkStatus=document.querySelector('#artwork-status');
+const artworkMessage=document.querySelector('#artwork-message');
+const artworkProgress=document.querySelector('#artwork-progress');
+const artworkRetry=document.querySelector('#artwork-retry');
+artworkRetry.onclick=()=>location.reload();
 const startWithArtwork = startLevel;
 startLevel = function(n) { return artworkReady && startWithArtwork(n); };
-playOne.disabled = playTwo.disabled = true;
-menuHint.textContent = '正在准备游戏画面…';
+function refreshArtworkStatus(){
+ artworkStatus.hidden=artworkReady;
+ playOne.disabled=!artworkReady;
+ playTwo.disabled=!artworkReady||!secondUnlocked;
+ playOne.classList.toggle('preparing',!artworkReady);
+ playTwo.classList.toggle('preparing',!artworkReady&&secondUnlocked);
+ playOne.textContent=artworkReady?'开始第一关':artworkFailed?'画面加载未完成':'第一关 · 准备画面中…';
+ playTwo.textContent=!secondUnlocked?'第二关 · 未解锁':artworkReady?'挑战第二关':'第二关 · 准备画面中…';
+ artworkRetry.hidden=!artworkFailed;
+ artworkMessage.textContent=artworkFailed?'加载遇到问题，可以返回地图或重新加载。':artworkLoaded?'正在准备画面 '+artworkLoaded+'/'+artwork.length+'，完成后即可开始':'首次打开正在准备画面，请稍候…';
+ if(artworkLoaded)artworkProgress.value=artworkLoaded;
+ artworkProgress.hidden=artworkFailed;
+}
+const menuBeforeArtworkStatus=updateMenu;
+updateMenu=function(){menuBeforeArtworkStatus();refreshArtworkStatus()};
+refreshArtworkStatus();
 document.documentElement.removeAttribute('data-loading');
 requestAnimationFrame(frame);
 let loadingTimeout;
-function showLoadFailure() {
-  loadMessage.textContent = '画面暂未加载完成。请用手机浏览器打开，或点击重新加载。';
-  document.documentElement.setAttribute('data-loading', '');
-  retryLoad.hidden = false;
-}
+function showLoadFailure(){artworkFailed=true;refreshArtworkStatus()}
 function beginArtworkLoad(){
-loadingTimeout = setTimeout(showLoadFailure, 18000);
-Promise.all(artwork.map(waitForImage)).then(() => {
-  artworkReady = true;
-  playOne.disabled = false;
+ loadingTimeout=setTimeout(showLoadFailure,18000);
+ Promise.all(artwork.map(image=>waitForImage(image).then(()=>{
+  artworkLoaded++;refreshArtworkStatus();
+ }))).then(()=>{
+  artworkReady=true;artworkFailed=false;
   clearTimeout(loadingTimeout);
-  document.documentElement.removeAttribute('data-loading');
+  menuNeedsPaint=true;
   updateMenu();
-}).catch(() => {
-  clearTimeout(loadingTimeout);
-  showLoadFailure();
-});
+ }).catch(()=>{clearTimeout(loadingTimeout);showLoadFailure()});
 }
 </script><script>
 const provinceSelect=document.querySelector('#province'),regionRecord=document.querySelector('#region-record');
